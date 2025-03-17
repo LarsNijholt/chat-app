@@ -28,13 +28,12 @@ public class ApplicationDbContext : DbContext
             .HasKey(x => x.Id);
 
         modelBuilder.Entity<Credential>()
-            .HasKey(x => x.CredentialId);
+            .HasKey(x => x.Id);
     }
-
 
     /// <inheritdoc />
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("USER ID = postgres;PASSWORD = postgres;HOST = localhost;PORT = 5432;DATABASE = ChatApp;");
+        optionsBuilder.UseNpgsql();
     }
 }

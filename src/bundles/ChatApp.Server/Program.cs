@@ -6,11 +6,12 @@ using FastEndpoints.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services;
+var connectionString = builder.Configuration.GetConnectionString("Postgres");
 
 services
     .AddFastEndpoints()
     .SwaggerDocument()
-    .AddPersistence();
+    .AddPersistence(connectionString!);
 
 services.AddHealthChecks();
 
@@ -23,10 +24,10 @@ app
 app.UseHttpsRedirection();
 app.UseHealthChecks("/health");
 
-await using var scope = app.Services.CreateAsyncScope();
-
-var initializer = scope.ServiceProvider.GetRequiredService<DbContextInitializer>();
-await initializer.InitializeDatabaseAsync();
+// await using var scope = app.Services.CreateAsyncScope();
+//
+// var initializer = scope.ServiceProvider.GetRequiredService<DbContextInitializer>();
+// await initializer.InitializeDatabaseAsync();
 
 await app.RunAsync();
 
