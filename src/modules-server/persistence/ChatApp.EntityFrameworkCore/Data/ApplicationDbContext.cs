@@ -14,6 +14,11 @@ public class ApplicationDbContext : DbContext
     /// </summary>
     public DbSet<User> Users { get; set; }
 
+    /// <summary>
+    /// The credentials repository for the DbContext.
+    /// </summary>
+    public DbSet<Credential> Credentials { get; set; }
+
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -21,6 +26,9 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<User>()
             .HasKey(x => x.Id);
+
+        modelBuilder.Entity<Credential>()
+            .HasKey(x => x.CredentialId);
     }
 
 
