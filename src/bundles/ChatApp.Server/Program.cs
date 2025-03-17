@@ -1,3 +1,4 @@
+using ChatApp.EntityFrameworkCore.Data;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 
@@ -19,6 +20,11 @@ app
 
 app.UseHttpsRedirection();
 app.UseHealthChecks("/health");
+
+await using var scope = app.Services.CreateAsyncScope();
+
+var initializer = scope.ServiceProvider.GetRequiredService<DbContextInitializer>();
+await initializer.InitializeDatabaseAsync();
 
 await app.RunAsync();
 
