@@ -8,15 +8,15 @@ namespace ChatApp.EntityFrameworkCore.Data;
 /// </summary>
 public class DbContextInitializer
 {
-    private readonly ApplicationDbContext _dbContext;
-    private readonly ILogger _logger;
+    private readonly IDbContextFactory<ApplicationDbContext> _dbContextFactory;
+    private readonly ILogger<DbContextInitializer> _logger;
 
     /// <summary>
     /// A class responsible for initializing the application's database.
     /// </summary>
-    public DbContextInitializer(ApplicationDbContext dbContext, ILogger logger)
+    public DbContextInitializer(IDbContextFactory<ApplicationDbContext> dbContextFactory, ILogger<DbContextInitializer> logger)
     {
-        _dbContext = dbContext;
+        _dbContextFactory = dbContextFactory;
         _logger = logger;
     }
     
@@ -27,8 +27,9 @@ public class DbContextInitializer
     {
         try
         {
+            await using var dbContext = await _dbContextFactory.CreateDbContextAsync();
             _logger.LogInformation("Initializing the database");
-            await _dbContext.Database.MigrateAsync();
+            await dbContext.Database.MigrateAsync();
         }
         catch (Exception e)
         {

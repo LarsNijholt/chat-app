@@ -1,4 +1,5 @@
 using ChatApp.EntityFrameworkCore.Data;
+using ChatApp.EntityFrameworkCore.Extensions;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 
@@ -8,7 +9,8 @@ var services = builder.Services;
 
 services
     .AddFastEndpoints()
-    .SwaggerDocument();
+    .SwaggerDocument()
+    .AddPersistence();
 
 services.AddHealthChecks();
 
