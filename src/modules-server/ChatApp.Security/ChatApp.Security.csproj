@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FastEndpoints" />
+      <PackageReference Include="Fido2" />
+      <PackageReference Include="Fido2.AspNet" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\persistence\ChatApp.EntityFrameworkCore\ChatApp.EntityFrameworkCore.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,6 +1,5 @@
-@using System.Text.RegularExpressions
-@using System.ComponentModel.DataAnnotations
 @using ChatApp.Web.Components.Layout
+@using ChatApp.Web.Contracts
 
 @page "/register"
 
@@ -8,54 +7,99 @@
 
 @inherits ComponentBase
 
+@inject IUserService UserService
 
-<MudGrid Justify="Justify.Center">
-    <MudItem xs="12" sm="7" >
-        <MudPaper Class="pa-4">
-            <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                <MudTextField T="string" Label="Username" Required="true" RequiredError="User name is required!" />
-                    <MudTextField T="string" Label="Email" Required="true" RequiredError="Email is required!"
-                              Validation="@(new EmailAddressAttribute() {ErrorMessage = "The email address is invalid"})" />
-                    <MudTextField T="string" Label="Password" HelperText="Choose a strong password" @ref="pwField1"
-                                  InputType="InputType.Password"
-                                  Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true"
-                                  RequiredError="Password is required!"/>
-                    <MudTextField T="string"
-                                  Label="Password" HelperText="Repeat the password" InputType="InputType.Password"
-                                  Validation="@(new Func<string, string>(PasswordMatch))"/>
-            </MudForm>   
-        </MudPaper>
-    </MudItem>
-</MudGrid>
+<section class="row">
+    <div class="col">
 
+        <h3>Create an account</h3>
+        <form>
+            <label for="register-username">Username</label>
+            <div class="input-group">
+                <div class="input-group-text">
+                    <span class="fas fa-user"></span>
+                </div>
+                <input class="form-control" type="text" placeholder="abergs" id="register-username" @bind="RegisterUsername" required>
+            </div>
+
+            <label for="displayName">Display name</label>
+            <div class="input-group">
+                <div class="input-group-text">
+                    <span class="fas fa-user">
+                    </span>
+                </div>
+                <input class="form-control" type="text" placeholder="Anders Åberg" id="displayName" @bind="RegisterDisplayName">
+            </div>
+        </form>
+        <div class="input-group">
+            <button class="btn btn-primary" disabled="@(!RegisterFormValid())" @onclick="SignUp">Create account</button>
+        </div>
+    </div>
+    <div class="col-2"></div>
+    <div class="col">
+
+        <h3>Sign in</h3>
+        <form>
+            <label for="login-username">Username</label>
+            <div class="input-group">
+                <div class="input-group-text">
+                    <span class="fas fa-user">
+                    </span>
+                </div>
+                <input class="form-control" type="text" placeholder="abergs" id="login-username" required @bind="LoginUsername">
+            </div>
+        </form>
+        <div class="input-group">
+            <button class="btn btn-primary" disabled="@(!LoginFormValid())" @onclick="Login">Sign in</button>
+        </div>
+    </div>
+</section>
+
+<section class="pt-5">
+    <h1>Explanation: Passwordless login with FIDO2</h1>
+    <p>
+        In this scenario, WebAuthn is used as together with a username to securely authenticate the user. This scenario can still be considered MFA (although no password is used) since the Authenticator can verify the User.
+        The flow is visualized in the figure below.
+    </p>
+    <img src="images/scenario2.png" alt="figure visualizing username and challenge sent together with assertion" />
+    <p>In this flow the Relying Party should tell the Authenticator to do User Verification (set UserVerification to required) via Biometrics/pin, thus the authentication is MFA (Something the user has - the private key - and something the user knows/is - the PIN or biometrics). However in scenarios where security requirements are very low we we could discourage user verification to minimize the user interaction needed to sign in. If discouraged, only user presence will be checked (Any human is present at the device).</p>
+</section>
 
 @code {
-    bool success;
-    string[] errors = { };
-    MudTextField<string> pwField1;
-    MudForm form;
+    private bool WebAuthnSupported { get; set; } = true;
 
-    private IEnumerable<string> PasswordStrength(string pw)
+    private string RegisterUsername { get; set; } = "";
+    private string? RegisterDisplayName { get; set; }
+
+    private string LoginUsername { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
     {
-        if (string.IsNullOrWhiteSpace(pw))
-        {
-            yield return "Password is required!";
-            yield break;
-        }
-        if (pw.Length < 8)
-            yield return "Password must be at least of length 8";
-        if (!Regex.IsMatch(pw, @"[A-Z]"))
-            yield return "Password must contain at least one capital letter";
-        if (!Regex.IsMatch(pw, @"[a-z]"))
-            yield return "Password must contain at least one lowercase letter";
-        if (!Regex.IsMatch(pw, @"[0-9]"))
-            yield return "Password must contain at least one digit";
+        WebAuthnSupported = await UserService.IsWebAuthnSupportedAsync();
     }
 
-    private string PasswordMatch(string arg)
+    private bool RegisterFormValid() => !string.IsNullOrWhiteSpace(RegisterUsername);
+    
+    private async Task SignUp()
     {
-        if (pwField1.Value != arg)
-            return "Passwords don't match";
-        return null;
+        var username = RegisterUsername;
+        var displayName = RegisterDisplayName;
+
+        var result = await UserService.RegisterAsync(username, displayName);
+        Console.WriteLine(result);
+    }
+
+    private bool LoginFormValid() => !string.IsNullOrWhiteSpace(LoginUsername);
+    private async Task Login()
+    {
+        var result = await UserService.LoginAsync(LoginUsername);
+
+        if (result.StartsWith("Bearer"))
+        {
+            Console.WriteLine($"Token: {result.Replace("Bearer ", "")}");
+        }
+        else
+        {
+        }
     }
 }

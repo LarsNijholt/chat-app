@@ -1,4 +1,6 @@
 
+using Fido2NetLib.Objects;
+
 namespace ChatApp.Core.Entities;
 
 /// <summary>
@@ -7,32 +9,59 @@ namespace ChatApp.Core.Entities;
 public class Credential
 {
     /// <summary>
-    /// The id for the credential.
+    /// The Credential ID of the public key credential source.
     /// </summary>
-    public int CredentialId { get; set; }
-    
+    public required byte[] Id { get; set; }
+
     /// <summary>
-    /// The Id that related to the <see cref="User"/>.
+    /// The credential public key of the public key credential source.
     /// </summary>
-    public int UserId { get; set; }
-    
+    public byte[] PublicKey { get; set; }
+
     /// <summary>
-    /// The public key class
+    /// The latest value of the signature counter in the authenticator data from any ceremony using the public key credential source.
     /// </summary>
-    public string PublicKey { get; set; }
-    
+    public uint SignCount { get; set; }
+
     /// <summary>
-    /// The Sign Count.
+    /// The value returned from getTransports() when the public key credential source was registered.
     /// </summary>
-    public int SignCount { get; set; }
-    
+    public AuthenticatorTransport[] Transports { get; set; }
+
     /// <summary>
-    /// The Created date for the credential.
+    /// The value of the BE flag when the public key credential source was created.
     /// </summary>
-    public DateTimeOffset CreatedDate { get; set; }
-    
+    public bool IsBackupEligible { get; set; }
+
     /// <summary>
-    /// The date the credential was last used.
+    /// The latest value of the BS flag in the authenticator data from any ceremony using the public key credential source.
     /// </summary>
-    public DateTimeOffset LastUsedDate { get; set; }
+    public bool IsBackedUp { get; set; }
+
+    /// <summary>
+    /// The value of the attestationObject attribute when the public key credential source was registered.
+    /// Storing this enables the Relying Party to reference the credential's attestation statement at a later time.
+    /// </summary>
+    public byte[] AttestationObject { get; set; }
+
+    /// <summary>
+    /// The value of the clientDataJSON attribute when the public key credential source was registered.
+    /// Storing this in combination with the above attestationObject item enables the Relying Party to re-verify the attestation signature at a later time.
+    /// </summary>
+    public byte[] AttestationClientDataJson { get; set; }
+
+    public byte[] UserId { get; set; }
+
+    /// <summary>
+    /// Exposes an Descriptor Object for this credential, used as input to the library for certain operations.
+    /// </summary>
+    public PublicKeyCredentialDescriptor Descriptor => new(Id);
+
+    public byte[] UserHandle { get; set; }
+
+    public string AttestationFormat { get; set; }
+
+    public DateTimeOffset RegDate { get; set; }
+
+    public Guid AaGuid { get; set; }
 }

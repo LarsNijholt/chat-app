@@ -28,7 +28,7 @@ public class ApplicationDbContext : DbContext
             .HasKey(x => x.Id);
 
         modelBuilder.Entity<Credential>()
-            .HasKey(x => x.CredentialId);
+            .HasKey(x => x.Id);
     }
 
 
