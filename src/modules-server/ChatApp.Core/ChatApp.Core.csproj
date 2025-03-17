@@ -1,5 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <PackageReference Include="Fido2.Models" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+
+        <LangVersion>latest</LangVersion>
+        <RepositoryType>git</RepositoryType>
+
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisModeDocumentation>Default</AnalysisModeDocumentation>
+        <AnalysisLevelDocumentation>latest</AnalysisLevelDocumentation>
+        <AnalysisLevel>latest</AnalysisLevel>
+
+        <!-- https://github.com/dotnet/sourcelink -->
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnableTrimAnalyzer>false</EnableTrimAnalyzer>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Fido2.Models" Version="4.0.0-beta.16" />
+    </ItemGroup>
 </Project>

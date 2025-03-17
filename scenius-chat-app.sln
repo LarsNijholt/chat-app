@@ -11,14 +11,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-studio", "modules-studio", "{B0001B55-B0CE-49A0-8A58-6BDC33B8E1BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{87B9B488-3879-4B78-A729-A26A0567C55E}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{65AB7F17-0678-41B3-9795-D6AA67B26543}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{8018E364-EFF5-4028-B471-32D463D665D2}"
-	ProjectSection(SolutionItems) = preProject
-		Directory.build.props = Directory.build.props
-		Directory.packages.props = Directory.packages.props
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.EntityFrameworkCore", "src\modules-server\persistence\ChatApp.EntityFrameworkCore\ChatApp.EntityFrameworkCore.csproj", "{6558D577-2C8C-4224-A27D-C55C91C99756}"
 EndProject
@@ -27,6 +24,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Web", "src\bundles\ChatApp.Web\ChatApp.Web.csproj", "{C37FB0D4-5127-4373-B2CD-F40FE783ABE2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Security", "src\modules-server\ChatApp.Security\ChatApp.Security.csproj", "{77C3176C-CC8D-4059-9B60-C93B34A12511}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C5A3CF27-0317-42F7-9836-7683DF61AFB2}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,19 +2,35 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
+
+        <LangVersion>latest</LangVersion>
+        <RepositoryType>git</RepositoryType>
+
         <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisModeDocumentation>Default</AnalysisModeDocumentation>
+        <AnalysisLevelDocumentation>latest</AnalysisLevelDocumentation>
+        <AnalysisLevel>latest</AnalysisLevel>
+
+        <!-- https://github.com/dotnet/sourcelink -->
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <EnableTrimAnalyzer>false</EnableTrimAnalyzer>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="FastEndpoints" />
-      <PackageReference Include="Fido2" />
-      <PackageReference Include="Fido2.AspNet" />
-      <PackageReference Include="Microsoft.EntityFrameworkCore" />
+        <PackageReference Include="FastEndpoints"/>
+        <PackageReference Include="FastEndpoints" Version="5.35.0"/>
+        <PackageReference Include="Fido2" Version="4.0.0-beta.16" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\persistence\ChatApp.EntityFrameworkCore\ChatApp.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\persistence\ChatApp.EntityFrameworkCore\ChatApp.EntityFrameworkCore.csproj"/>
     </ItemGroup>
 
 </Project>

@@ -1,12 +1,41 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+
+    <LangVersion>latest</LangVersion>
+    <RepositoryType>git</RepositoryType>
+
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisModeDocumentation>Default</AnalysisModeDocumentation>
+    <AnalysisLevelDocumentation>latest</AnalysisLevelDocumentation>
+    <AnalysisLevel>latest</AnalysisLevel>
+
+    <!-- https://github.com/dotnet/sourcelink -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EnableTrimAnalyzer>false</EnableTrimAnalyzer>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Fido2" />
-    <PackageReference Include="Fido2.Models" />
-    <PackageReference Include="MudBlazor" />
+    <PackageReference Include="Fido2" Version="4.0.0-beta.16" />
+    <PackageReference Include="Fido2.Models" Version="4.0.0-beta.16" />
+    <PackageReference Include="MudBlazor" Version="8.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\js\WebAuthn.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
   </ItemGroup>
 </Project>
