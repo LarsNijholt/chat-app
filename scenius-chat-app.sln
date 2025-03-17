@@ -6,8 +6,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "bundles", "bundles", "{E92A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Server", "src\bundles\ChatApp.Server\ChatApp.Server.csproj", "{D92FF3EC-4AC9-4F23-B418-14DE945EA2AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Web", "src\bundles\ChatApp.Web\ChatApp.Web.csproj", "{4E018709-BEBB-436A-9755-208A4F553F55}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-server", "modules-server", "{7B71F488-869C-46E9-A082-34B6F1E0ECBC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "modules-studio", "modules-studio", "{B0001B55-B0CE-49A0-8A58-6BDC33B8E1BB}"
@@ -15,6 +13,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{87B9B488-3879-4B78-A729-A26A0567C55E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "github", "github", "{65AB7F17-0678-41B3-9795-D6AA67B26543}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\build.yml = .github\workflows\build.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{8018E364-EFF5-4028-B471-32D463D665D2}"
 	ProjectSection(SolutionItems) = preProject
@@ -25,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.EntityFrameworkCore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Core", "src\modules-server\ChatApp.Core\ChatApp.Core.csproj", "{39C07276-6A64-4659-8B77-0EF8C00A3672}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatApp.Web", "src\bundles\ChatApp.Web\ChatApp.Web.csproj", "{C37FB0D4-5127-4373-B2CD-F40FE783ABE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,21 +36,17 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E92A800D-6496-4D64-A7F9-C4CA03613D0C} = {D7106DD0-C2E0-4DA1-8C40-2829FA9DC8F3}
 		{D92FF3EC-4AC9-4F23-B418-14DE945EA2AF} = {E92A800D-6496-4D64-A7F9-C4CA03613D0C}
-		{4E018709-BEBB-436A-9755-208A4F553F55} = {E92A800D-6496-4D64-A7F9-C4CA03613D0C}
 		{7B71F488-869C-46E9-A082-34B6F1E0ECBC} = {D7106DD0-C2E0-4DA1-8C40-2829FA9DC8F3}
 		{B0001B55-B0CE-49A0-8A58-6BDC33B8E1BB} = {D7106DD0-C2E0-4DA1-8C40-2829FA9DC8F3}
 		{6558D577-2C8C-4224-A27D-C55C91C99756} = {7B71F488-869C-46E9-A082-34B6F1E0ECBC}
 		{39C07276-6A64-4659-8B77-0EF8C00A3672} = {7B71F488-869C-46E9-A082-34B6F1E0ECBC}
+		{C37FB0D4-5127-4373-B2CD-F40FE783ABE2} = {E92A800D-6496-4D64-A7F9-C4CA03613D0C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D92FF3EC-4AC9-4F23-B418-14DE945EA2AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D92FF3EC-4AC9-4F23-B418-14DE945EA2AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D92FF3EC-4AC9-4F23-B418-14DE945EA2AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D92FF3EC-4AC9-4F23-B418-14DE945EA2AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E018709-BEBB-436A-9755-208A4F553F55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E018709-BEBB-436A-9755-208A4F553F55}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E018709-BEBB-436A-9755-208A4F553F55}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E018709-BEBB-436A-9755-208A4F553F55}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6558D577-2C8C-4224-A27D-C55C91C99756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6558D577-2C8C-4224-A27D-C55C91C99756}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6558D577-2C8C-4224-A27D-C55C91C99756}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,5 +55,9 @@ Global
 		{39C07276-6A64-4659-8B77-0EF8C00A3672}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39C07276-6A64-4659-8B77-0EF8C00A3672}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39C07276-6A64-4659-8B77-0EF8C00A3672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C37FB0D4-5127-4373-B2CD-F40FE783ABE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C37FB0D4-5127-4373-B2CD-F40FE783ABE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C37FB0D4-5127-4373-B2CD-F40FE783ABE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C37FB0D4-5127-4373-B2CD-F40FE783ABE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
